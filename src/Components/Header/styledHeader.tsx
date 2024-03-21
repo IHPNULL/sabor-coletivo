@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.div`
-    .botao1 {
+    .botai {
+        .texto {
+            
+        }
         background-color: blue;
     }
+    
 `
