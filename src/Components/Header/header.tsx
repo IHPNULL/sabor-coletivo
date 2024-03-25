@@ -4,6 +4,6 @@ import { StyledHeader } from "./styledHeader"
 export const Header = () => {
     return (
     <StyledHeader>
-        aaaaa
+        CCCCC
     </StyledHeader>)
 }
