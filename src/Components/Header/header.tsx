@@ -1,9 +1,11 @@
 import React from "react"
-import { StyledHeader } from "./styledHeader"
+import { PageTitle, StyledHeader } from "./styledHeader"
 
 export const Header = () => {
     return (
     <StyledHeader>
-        CCCCC
-    </StyledHeader>)
+        
+        <PageTitle>Sabor Coletivo</PageTitle>
+    </StyledHeader>
+    )
 }
