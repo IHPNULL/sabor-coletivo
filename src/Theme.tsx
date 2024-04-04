@@ -1,8 +1,23 @@
-export const Theme = {
-  backgroundColor: "#F0EAD2",
-  primary: "#22577A",
-  secondary: "#38A3A5",
-  green: "#57CC99",
-  secondgreen: "#80ED99",
-  lightgreen: "#C7F9CC",
-};
+import { createTheme } from "@mui/material";
+
+export const Theme = createTheme({
+  palette: {
+    primary:{
+      main:"#22577A",
+      light:"#38A3A5",
+    }, 
+    secondary: {
+      main: "#57CC99",
+      dark: "#80ED99",
+      light: "#C7F9CC",
+    },
+  },
+  typography:{
+    fontFamily:  "road rage",
+
+    body1: {
+      fontFamily: "road rage",
+      fontWeight: 500,
+    },
+  }
+});
