@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { Header } from "../Components/Header/header";
 import { Theme } from "../Theme";
 import PostCard from "./Card";
+import { recipe1 } from "../assets/mockedData";
 
 const App = styled.div`
   display: flex;
@@ -27,7 +28,7 @@ function Main() {
       <App>
         <Header />
         <Cards>
-          <PostCard />
+          <PostCard recipe={recipe1} />
         </Cards>
       </App>
     </ThemeProvider>
