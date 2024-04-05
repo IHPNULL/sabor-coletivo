@@ -106,3 +106,67 @@ Espalhe a maionese HELLMANN´S e finalize com as outras partes dos pães e sirva
     carbs: 5,
     fat: 37,
 }
+
+export const recipe5:RecipeType = {
+    User: user1,
+    title: "Sopa de legumes com macarrão",
+    ingredients:[
+       
+       "1 tomate médio picado",
+       "2 cenouras médias cortadas em cubos",
+       "12 vagens picadas",
+       "1 tablete de caldo de carne",
+       "1 pitada de pimenta do reino ou pimenta calabresa",
+       "Sal a gosto",
+       "250 g de carne bovina (de preferência músculo ou costela)",
+       "2 batatas médias cortadas em cubos",
+       "2 mandioquinhas médias cortadas em cubos", 
+       "2 xícaras de macarrão (tipo argolinha ou conchinha ou ave maria ou cabelo de anjo)",
+       "1 envelope de tempero sazon',
+       "1 xícara de salsinha e cebolinha bem picadinhas",
+       "Água até um pouco mais de a metade da panela de pressão",
+
+    ],
+    steps: "Coloque um fio de óleo na panela de pressão,
+Acrescente a cebola e deixe dourar,
+Acrescente a carne bovina e deixe dourar,
+Acrescente o tomate picado,
+Coloque o caldo de carne e o envelope de tempero tipo sazon,
+Junte as batatas, as cenouras, as mandioquinhas e as vagens e deixe refogar por 3 minutinhos (sempre mexendo para não grudar no fundo da panela),
+Adicione a salsinha e a cebolinha, a pimenta, o sal e, por último, a água,
+Obs: A água deve ser adicionada até que ultrapasse um pouco mais da metade da panela de pressão,
+Tampe a panela de pressão e deixe cozinhar por 40 minutos,
+Após os 40 minutos, destampe a panela e acrescente o macarrão,
+Assim que o macarrão estiver cozido, desligue a panela e pode servir,
+Dica: Não deixe o macarrão muito mole",
+
+    calories: 120,
+    portion: 70,
+    protein: 9,
+    carbs: 65,
+    fat: 50,
+}
+
+export const recipe6:RecipeType = {
+    User: user1,
+    title: "Ovo frito",
+    ingredients:[
+        "1 ovo",
+        "1 colher (chá) de azeite (ou óleo)",
+        "sal e pimenta-do-reino moída na hora a gosto",
+        
+    ],
+    steps: "Numa tigela pequena quebre o ovo, com cuidado para não furar a gema,
+Leve uma frigideira antiaderente ao fogo baixo e regue com 1 colher (chá)
+ de azeite. Com cuidado, transfira o ovo para a frigideira e deixe cozinhar por cerca de 2 minutos – com uma espátula de silicone, 
+vá puxando a borda da clara para perto da gema, para manter o formato arredondado do ovo,
+Assim que a clara começar a firmar,
+ tempere com sal e pimenta a gosto e tampe a frigideira para o ovo terminar de fritar
+ mas a gema ainda ficar mole – o vapor permite que a clara cozinhe por igual sem a base do ovo queimar. Sirva a seguir.",
+
+    calories: 50,
+    portion: 20,
+    protein: 2,
+    carbs: 15,
+    fat: 20,
+}
