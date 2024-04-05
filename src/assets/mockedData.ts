@@ -42,10 +42,9 @@ export const recipe2:RecipeType = {
     ],
     steps: "Escorra o milho e use a própria lata para as medidas, Unte e enfarinhe uma forma de bolo com furo, Coloque no liquidificador o milho (já escorrido), o leite, açúcar, flocão de milho, óleo, ovos e bata bem até que o milho fique bem moído.
 Se quiser, pode acrescentar duas colheres de sopa de coco ralado, Acrescente o fermento em pó e pulse o liquidificador 3 vezes,Despeje essa massa na forma e leve ao forno médio,
-Deixe assar por, aproximadamente, 40 minutos, Faça o teste do palito e observe um tom dourado médio, para saber que o bolo está pronto, Espere esfriar totalmente para desenformar
-"
+Deixe assar por, aproximadamente, 40 minutos, Faça o teste do palito e observe um tom dourado médio, para saber que o bolo está pronto, Espere esfriar totalmente para desenformar",
 
-,
+
     calories: 140,
     portion: 60,
     protein: 6,
