@@ -47,8 +47,8 @@ export default function PostCard(props:PostCardType) {
     <Card sx={{ maxWidth: 500 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} src={props.recipe.User.profilePic} aria-label="recipe">
-            {props.recipe.User.name} 
+          <Avatar sx={{ bgcolor: red[500] }} src={props.recipe.user.profilePic} aria-label="recipe">
+            {props.recipe.user.name} 
           </Avatar>
         }
         action={

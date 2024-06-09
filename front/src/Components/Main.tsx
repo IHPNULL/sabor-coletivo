@@ -1,10 +1,11 @@
-import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 
 import { Header } from "../Components/Header/header";
 import { Theme } from "../Theme";
-import PostCard from "./Card";
 import { recipe1 } from "../assets/mockedData";
+import { getPosts } from "../services/postsService";
+import PostCard from "./Card";
+import { useEffect, useState } from "react";
 
 const App = styled.div`
   display: flex;
@@ -23,6 +24,13 @@ const Cards = styled.div`
 `
 
 function Main() {
+  const [posts, setPosts] = useState()
+
+  useEffect( () => {
+    getPosts().then(({data}) => setPosts(data))
+}, []);
+
+  console.log(posts)
   return (
     <ThemeProvider theme={Theme}>
       <App>
