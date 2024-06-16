@@ -1,14 +1,14 @@
 export interface UserType {
-  userCode: Number;
   name: String;
+  userCode?: Number;
   profilePic: string;
   followers: UserType[];
   following: UserType[];
-  age: Number;
+  age?: Number;
+  token?: string;
 }
 
-export type UserAuthType = {
+export interface UserAuthType {
   senha: String;
   email: String;
-  userCode: Number;
-};
+}

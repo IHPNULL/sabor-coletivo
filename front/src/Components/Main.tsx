@@ -1,44 +1,36 @@
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
-import { Header } from "../Components/Header/header";
+import { createContext, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Theme } from "../Theme";
-import { recipe1 } from "../assets/mockedData";
-import { getPosts } from "../services/postsService";
-import PostCard from "./Card";
-import { useEffect, useState } from "react";
+import { AppContextType } from "../types/AppcontextType";
+import { UserType } from "../types/User";
+import { RecipeType } from "../types/recipeType";
+import { Router } from "./Router";
 
-const App = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: ${(props) => props.theme.backgroundColor};
-`;
-
-const Cards = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+export const appContext = createContext<AppContextType>({
+  posts: [],
+  setUserByContext: () => {},
+  setPostsByContext: () => {},
+});
 
 function Main() {
-  const [posts, setPosts] = useState()
+  const [posts, setPosts] = useState<RecipeType[]>([]);
+  const [user, setUser] = useState<UserType>();
 
-  useEffect( () => {
-    getPosts().then(({data}) => setPosts(data))
-}, []);
+  const setUserByContext = (user?: UserType) => (user ? setUser(user) : null);
+  const setPostsByContext = (posts?: RecipeType[]) =>
+    posts ? setPosts(posts) : null;
 
-  console.log(posts)
   return (
     <ThemeProvider theme={Theme}>
-      <App>
-        <Header />
-        <Cards>
-          <PostCard recipe={recipe1} />
-        </Cards>
-      </App>
+      <appContext.Provider
+        value={{ posts, user, setUserByContext, setPostsByContext }}
+      >
+        <ToastContainer />
+        <Router />
+      </appContext.Provider>
     </ThemeProvider>
   );
 }
