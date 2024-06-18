@@ -47,4 +47,24 @@ postsController.get("/:user", auth, async (req, res) => {
   }
 });
 
-module.exports = postsController;
+// endpoint
+postsController.post("/:d/like", auth, async(req, res) => {
+  const { id } = req.params;
+
+  try {
+    const post = await PostModel.findById(id);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found"});
+    }
+
+    post.likes += 1;
+    await post.save();
+
+    return res.status(200).json({message: "Likes incremented", likes: post.likes});
+  } catch (err) {
+    console.log('Error while incremeting likes: ${err}');
+    return res.status(500).json({error: err});
+  }
+});
+
+module.exports = postsController
