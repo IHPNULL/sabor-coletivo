@@ -13,28 +13,24 @@ import {
   Typography,
 } from "@mui/material";
 import * as React from "react";
-import { toast } from "react-toastify";
-import { LoginServices } from "../../services/loginService";
-import { appContext } from "../Main";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useLogin } from "../../hooks/loginHook";
 
 export const Login = () => {
-  const { setUserByContext } = React.useContext(appContext);
+  const { login } = useLogin();
+
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    LoginServices()
-      .Login({
-        email: data.get("email")?.toString() ?? ``,
-        senha: data.get("senha")?.toString() ?? ``,
-      })
-      .then((response) => {
-        setUserByContext(response?.data);
-        navigate("/home");
-      })
+    login({
+      email: data.get("email")?.toString() ?? ``,
+      senha: data.get("senha")?.toString() ?? ``,
+    })
+      .then(() => navigate("/home"))
       .catch((err) => {
         toast.error(err.response.data.mensagem);
       });

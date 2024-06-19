@@ -1,5 +1,7 @@
 import axios from "axios";
 import { UserAuthType, UserType } from "../types/User";
+import { apiSlice } from "../reducers/apiSlice";
+import { API } from "../app/common";
 
 interface signupType extends UserType {
   senha: String;
@@ -15,3 +17,25 @@ export const LoginServices = () => {
 
   return { Login, SignUp };
 };
+
+export const extendedApiLoginSlice = apiSlice.injectEndpoints({
+  endpoints: (build) => ({
+    getLogin: build.mutation({
+      query: (userToLogin) => ({
+        url: `${API.BaseURL}/login`,
+        method: `POST`,
+        body: userToLogin,
+      }),
+    }),
+    getUserData: build.query({
+      transformResponse: (baseQueryReturnValue: UserType): UserType =>
+        baseQueryReturnValue,
+      query: (userToLogin: string) => ({
+        url: `${API.BaseURL}/user/${userToLogin}`,
+      }),
+    }),
+  }),
+});
+
+export const { useGetLoginMutation, useGetUserDataQuery } =
+  extendedApiLoginSlice;

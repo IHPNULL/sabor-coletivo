@@ -1,21 +1,27 @@
-import React from "react"
-import { PageTitle, StyledHeader,AvatarDiv } from "./styledHeader"
-import { Avatar, Button, Typography } from "@mui/material"
-import CreateIcon  from '@mui/icons-material/Create';
+import CreateIcon from "@mui/icons-material/Create";
+import { Avatar, Button, Typography } from "@mui/material";
+import { AvatarDiv, PageTitle, StyledHeader } from "./styledHeader";
 
-import AvatarImg from '../../assets/1.png';
+import { Link } from "react-router-dom";
+import AvatarImg from "../../assets/1.png";
+import { useAppSelector } from "../../hooks/AppStoreHooks";
+import { selectUserProfile } from "../../reducers/userProfileSlice";
 
 export const Header = () => {
-    return (
+  const user = useAppSelector(selectUserProfile);
+
+  return (
     <StyledHeader>
-        <AvatarDiv>
-            <Avatar alt="Remy Sharp" src={AvatarImg} />
-            <Typography variant="body1">Olá Fulano</Typography>
-        </AvatarDiv>
-        <PageTitle>Sabor Coletivo</PageTitle>
+      <AvatarDiv>
+        <Avatar alt="Remy Sharp" src={AvatarImg} />
+        <Typography variant="body1">Olá {user.name}</Typography>
+      </AvatarDiv>
+      <PageTitle>Sabor Coletivo</PageTitle>
+      <Link to="publicar">
         <Button variant="contained" endIcon={<CreateIcon />}>
-            Publish
+          Publish
         </Button>
+      </Link>
     </StyledHeader>
-    )
-}
+  );
+};

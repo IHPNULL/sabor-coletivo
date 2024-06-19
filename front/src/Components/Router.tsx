@@ -1,7 +1,8 @@
-import { Login } from "@mui/icons-material";
+import { Login } from "./Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Application } from "./Application";
 import { SignUp } from "./Login/SignUp";
+import { Application } from "./Application";
+import { PostForm } from "./PostForm/PostForm";
 
 export const Router = () => {
   const router = createBrowserRouter([
@@ -12,6 +13,10 @@ export const Router = () => {
     {
       path: "/home",
       element: <Application />,
+    },
+    {
+      path: "/publicar",
+      element: <PostForm />,
     },
     {
       path: "/login",

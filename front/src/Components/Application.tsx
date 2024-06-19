@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
+import { createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { PostServices } from "../services/postsService";
-import PostCard from "./Card";
+import { useAppSelector } from "../hooks/AppStoreHooks";
+import { selectUserProfile } from "../reducers/userProfileSlice";
+import { extendedApiLoginSlice } from "../services/loginService";
 import { Header } from "./Header/header";
-import { appContext } from "./Main";
+import { PostsContainer } from "./PostsContainer/PostsContainer";
+import { AppContextType } from "../types/AppcontextType";
 
 const App = styled.div`
   display: flex;
@@ -16,32 +18,38 @@ const App = styled.div`
   background-color: ${(props) => props.theme.backgroundColor};
 `;
 
-const Cards = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+export const ApplicationContext = createContext<AppContextType>({
+  user: {
+    name: "defaultUser",
+    profilePic: "",
+    followers: [],
+    following: [],
+  },
+});
 
 export const Application = () => {
-  const { posts, user, setPostsByContext } = useContext(appContext);
+  const user = useAppSelector(selectUserProfile);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user?.token) {
-      PostServices()
-        .getPosts(user.token)
-        .then(({ data }) => setPostsByContext(data));
-    } else navigate("/login");
+    const token = localStorage.getItem("jwt-token");
+    if (!token) {
+      localStorage.clear();
+      navigate("/login");
+    }
   });
+
+  const { data: _user } = extendedApiLoginSlice.useGetUserDataQuery(
+    localStorage.getItem("userCode") ?? "",
+    { skip: !localStorage.getItem("userCode") || Boolean(user.userCode) }
+  );
 
   return (
     <App>
-      <Header />
-      <Cards>
-        {posts.map((post) => (
-          <PostCard recipe={post} />
-        ))}
-      </Cards>
+      <ApplicationContext.Provider value={{ user: _user }}>
+        <Header />
+        <PostsContainer />
+      </ApplicationContext.Provider>
     </App>
   );
 };

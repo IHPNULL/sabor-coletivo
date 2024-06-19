@@ -1,12 +1,20 @@
-import axios from "axios";
+import { toast } from "react-toastify";
+import { API } from "../app/common";
+import { apiSlice } from "../reducers/apiSlice";
+import { RecipeType } from "../types/recipeType";
 
-export const PostServices = () => {
-  const getPosts = (token: string) =>
-    axios.get("http://localhost:8080/posts/0", {
-      headers: {
-        Authorization: `Bearer ${token}`,
+export const extendedApiPostsSlice = apiSlice.injectEndpoints({
+  endpoints: (build) => ({
+    getPosts: build.query({
+      transformResponse: (baseQueryReturnValue?: RecipeType[]): RecipeType[] =>
+        baseQueryReturnValue ?? [],
+      transformErrorResponse: (response) => {
+        toast.error(`Error getting posts data. Error: ${response.status}`);
+        return response;
       },
-    });
+      query: (user: Number) => `${API.BaseURL}/posts/${user}`,
+    }),
+  }),
+});
 
-  return { getPosts };
-};
+export const { useGetPostsQuery } = extendedApiPostsSlice;
