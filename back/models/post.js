@@ -7,6 +7,7 @@ const PostModel = mongoose.model("posts", {
   postPics: Array,
   likes: Array,
   dateTime: Date,
+  likes: Number,
   ingredients: [String],
   steps: [String],
   calories: Number,

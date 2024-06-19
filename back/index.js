@@ -4,6 +4,7 @@ const express = require("express");
 const userController = require("./controllers/auth/usersController");
 const postsController = require("./controllers/auth/postsController");
 const loginController = require("./controllers/loginController");
+const cors = require("cors");
 
 const server = express();
 
@@ -25,8 +26,15 @@ server.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", false);
   next();
 });
+
+const corsOptions = {
+  credentials: true,
+  origin: ["http://localhost:3000", "http://localhost:80"], // Whitelist the domains you want to allow
+};
+
+server.use(cors(corsOptions));
 server.use(express.json());
-server.use("/users", userController);
+server.use("/signup", userController);
 server.use("/posts", postsController);
 server.use("/login", loginController);
 

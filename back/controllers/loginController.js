@@ -21,6 +21,10 @@ loginController.post("/", async (req, res) => {
 
     return res.status(200).json({
       mensagem: `Bem vindo ${user.name}`,
+      name: user.name,
+      userCode: user._id,
+      followers: user.followers,
+      following: user.following,
       token: token,
     });
   } else {
