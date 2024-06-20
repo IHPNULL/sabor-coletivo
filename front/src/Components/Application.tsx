@@ -15,7 +15,8 @@ const App = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: ${(props) => props.theme.backgroundColor};
+  background-color: ${(props) => props.theme.palette.secondary.light};
+  gap: 1rem;
 `;
 
 export const ApplicationContext = createContext<AppContextType>({
@@ -45,11 +46,11 @@ export const Application = () => {
   );
 
   return (
-    <App>
-      <ApplicationContext.Provider value={{ user: _user }}>
+    <ApplicationContext.Provider value={{ user: _user }}>
+      <App>
         <Header />
         <PostsContainer />
-      </ApplicationContext.Provider>
-    </App>
+      </App>
+    </ApplicationContext.Provider>
   );
 };

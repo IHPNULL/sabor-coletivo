@@ -1,54 +1,57 @@
-// import * as React from "react";
-// import { styled } from "@mui/material/styles";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ShareIcon from "@mui/icons-material/Share";
+import { Stack } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-// import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import ShareIcon from "@mui/icons-material/Share";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import PuddingImage from "../../assets/pudding.jpg"
+import { useMemo, useState } from "react";
+import PuddingImage from "../../assets/pudding.jpg";
+import { usePost } from "../../hooks/postHooks";
 import { RecipeType } from "../../types/recipeType";
-import { Stack } from "@mui/material";
 
 interface PostCardType {
-  recipe: RecipeType
+  recipe: RecipeType;
 }
-// interface ExpandMoreProps extends IconButtonProps {
-//   expand: boolean;
-// }
 
-// const ExpandMore = styled((props: ExpandMoreProps) => {
-//   const { expand, ...other } = props;
-//   return <IconButton {...other} />;
-// })(({ theme, expand }) => ({
-//   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-//   marginLeft: "auto",
-//   transition: theme.transitions.create("transform", {
-//     duration: theme.transitions.duration.shortest,
-//   }),
-// }));
+export default function PostCard(props: PostCardType) {
+  const [liked, setLiked] = useState(false);
+  const { Like, disLike, likeResult, disLikeResult } = usePost();
 
-export default function PostCard(props:PostCardType) {
-  //   const [expanded, setExpanded] = React.useState(false);
+  const likes = useMemo(
+    () =>
+      liked
+        ? likeResult?.data?.likes ?? props.recipe.likes
+        : disLikeResult?.data?.likes ?? props.recipe.likes,
+    [likeResult, disLikeResult, liked, props.recipe.likes]
+  );
 
-  //   const handleExpandClick = () => {
-  //     setExpanded(!expanded);
-  //   };
+  const handleLike = () => {
+    if (liked) {
+      setLiked(false);
+      disLike(props.recipe._id ?? "");
+    } else {
+      setLiked(true);
+      Like(props.recipe._id ?? "");
+    }
+  };
 
   return (
-    <Card sx={{ maxWidth: 500 }}>
+    <Card sx={{ minWidth: 500, maxWidth: 500 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} src={props.recipe.user.profilePic} aria-label="recipe">
-            {props.recipe.user.name} 
+          <Avatar
+            sx={{ bgcolor: red[500] }}
+            src={props.recipe.user.profilePic ?? "src/assets/1.png"}
+            aria-label="recipe"
+          >
+            {props.recipe.user.name}
           </Avatar>
         }
         action={
@@ -68,11 +71,11 @@ export default function PostCard(props:PostCardType) {
       <CardContent>
         <Stack>
           <Typography variant="body2" color="text.secondary">
-          <ul>
-            {props.recipe.ingredients.map(ingredient => {
-              return (<li>{ingredient}</li>)
-            })}
-          </ul>
+            <ul>
+              {props.recipe.ingredients.map((ingredient) => {
+                return <li>{ingredient}</li>;
+              })}
+            </ul>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {props.recipe.steps}
@@ -80,9 +83,10 @@ export default function PostCard(props:PostCardType) {
         </Stack>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton onClick={() => handleLike()} aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
+        {likes}
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>

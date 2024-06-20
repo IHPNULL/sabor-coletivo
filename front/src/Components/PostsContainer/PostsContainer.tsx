@@ -6,8 +6,11 @@ import { ApplicationContext } from "../Application";
 
 const Cards = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
 `;
 
 export const PostsContainer = () => {

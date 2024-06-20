@@ -1,6 +1,7 @@
 export interface UserType {
   name: String;
-  userCode?: Number;
+  userCode?: number;
+  _id?: string;
   profilePic: string;
   followers: UserType[];
   following: UserType[];
