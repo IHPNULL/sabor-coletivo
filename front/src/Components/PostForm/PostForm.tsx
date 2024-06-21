@@ -9,7 +9,9 @@ import {
 import * as React from "react";
 import { usePost } from "../../hooks/postHooks";
 import { RecipeFormType } from "../../types/recipeType";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { PageTitle } from "../Header/styledHeader";
+import { Link } from "react-router-dom";
 
 const FormTextBox = styled(TextField)`
   background-color: white;
@@ -45,7 +47,17 @@ export const PostForm = () => {
           alignItems: "center",
         }}
       >
-        <PageTitle>Qual delicia vamos compartilhar hoje?</PageTitle>
+        <Stack
+          direction="row"
+          gap={2}
+          alignItems="baseline"
+          justifyItems="center"
+        >
+          <Link to="/home">
+            <ArrowBackIcon />
+          </Link>
+          <PageTitle>Qual delicia vamos compartilhar hoje?</PageTitle>
+        </Stack>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <FormTextBox
             size="small"
@@ -65,6 +77,7 @@ export const PostForm = () => {
             name="ingredients"
             label="ingredientes"
             id="ingredients"
+            minRows={5}
             multiline
           />
           <FormTextBox
@@ -75,6 +88,7 @@ export const PostForm = () => {
             name="steps"
             label="Modo de preparo"
             id="steps"
+            minRows={5}
             multiline
           />
           <Stack alignItems="end">

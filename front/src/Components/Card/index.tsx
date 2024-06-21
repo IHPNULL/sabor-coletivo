@@ -1,7 +1,9 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import AddIcon from "@mui/icons-material/Add";
 import ShareIcon from "@mui/icons-material/Share";
-import { Stack } from "@mui/material";
+import { Stack, Tooltip } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,9 +14,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import { useMemo, useState } from "react";
-import PuddingImage from "../../assets/pudding.jpg";
+import PuddingImage from "../../assets/pudding.png";
 import { usePost } from "../../hooks/postHooks";
 import { RecipeType } from "../../types/recipeType";
+import { extendedApiLoginSlice } from "../../services/loginService";
 
 interface PostCardType {
   recipe: RecipeType;
@@ -23,6 +26,8 @@ interface PostCardType {
 export default function PostCard(props: PostCardType) {
   const [liked, setLiked] = useState(false);
   const { Like, disLike, likeResult, disLikeResult } = usePost();
+
+  const { data: _user } = extendedApiLoginSlice.useGetUserDataQuery("0");
 
   const likes = useMemo(
     () =>
@@ -43,15 +48,15 @@ export default function PostCard(props: PostCardType) {
   };
 
   return (
-    <Card sx={{ minWidth: 500, maxWidth: 500 }}>
+    <Card variant="outlined" sx={{ minWidth: 500, maxWidth: 500 }}>
       <CardHeader
         avatar={
           <Avatar
             sx={{ bgcolor: red[500] }}
-            src={props.recipe.user.profilePic ?? "src/assets/1.png"}
+            src={_user?.profilePic ?? "src/assets/1.png"}
             aria-label="recipe"
           >
-            {props.recipe.user.name}
+            {_user?.name}
           </Avatar>
         }
         action={
@@ -64,9 +69,9 @@ export default function PostCard(props: PostCardType) {
       />
       <CardMedia
         component="img"
-        height="194"
+        height="270"
         image={PuddingImage}
-        alt="Paella dish"
+        alt="Default image"
       />
       <CardContent>
         <Stack>
@@ -87,9 +92,19 @@ export default function PostCard(props: PostCardType) {
           <FavoriteIcon />
         </IconButton>
         {likes}
-        <IconButton aria-label="share">
+        <IconButton disabled aria-label="share">
           <ShareIcon />
         </IconButton>
+        <IconButton disabled aria-label="share">
+          <ModeCommentIcon />
+        </IconButton>
+        <Tooltip title="Adicionar receita para sua lista">
+          <span>
+            <IconButton disabled aria-label="share">
+              <AddIcon />
+            </IconButton>
+          </span>
+        </Tooltip>
       </CardActions>
     </Card>
   );

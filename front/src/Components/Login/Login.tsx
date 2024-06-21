@@ -7,8 +7,9 @@ import {
   Checkbox,
   Container,
   FormControlLabel,
-  Grid,
   Link,
+  Stack,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,6 +17,10 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLogin } from "../../hooks/loginHook";
+
+const FormTextBox = styled(TextField)`
+  background-color: white;
+`;
 
 export const Login = () => {
   const { login } = useLogin();
@@ -53,7 +58,7 @@ export const Login = () => {
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+          <FormTextBox
             margin="normal"
             required
             fullWidth
@@ -62,7 +67,7 @@ export const Login = () => {
             name="email"
             autoFocus
           />
-          <TextField
+          <FormTextBox
             margin="normal"
             required
             fullWidth
@@ -72,29 +77,23 @@ export const Login = () => {
             id="senha"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="default" />}
             label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          <Stack direction="row" justifyContent="space-between">
+            <Link href="/signup" variant="body2">
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Back
+              </Button>
+            </Link>
+            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              Sign In
+            </Button>
+          </Stack>
         </Box>
       </Box>
     </Container>

@@ -4,7 +4,7 @@ export const StyledHeader = styled.div`
   display: inline-flex;
   flex-direction: row;
   justify-content: space-around;
-  background-color: ${(props) => props.theme.palette.primary.light};
+  /* background-color: ${(props) => props.theme.palette.secondary.dark}; */
   align-items: baseline;
 `;
 

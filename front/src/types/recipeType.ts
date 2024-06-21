@@ -16,7 +16,7 @@ export type RecipeFormType = {
 export type RecipeType = {
   _id: string;
   likes: number;
-  user: UserType;
+  user: number;
   title: String;
   ingredients: String[];
   steps: String;

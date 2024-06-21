@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useGetPostsQuery } from "../../services/postsService";
 import PostCard from "../Card";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ApplicationContext } from "../Application";
 
 const Cards = styled.div`
@@ -16,9 +16,19 @@ const Cards = styled.div`
 export const PostsContainer = () => {
   const { user } = useContext(ApplicationContext);
 
-  const { data: posts = [] } = useGetPostsQuery(user?.userCode ?? 0, {
+  const {
+    data: posts = [],
+    refetch,
+    isUninitialized,
+  } = useGetPostsQuery(user?.userCode ?? 0, {
     skip: !localStorage.getItem("userCode"),
   });
+
+  useEffect(() => {
+    if (!isUninitialized) {
+      refetch();
+    }
+  }, [isUninitialized]);
 
   return (
     <Cards>

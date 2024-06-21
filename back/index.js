@@ -34,7 +34,7 @@ const corsOptions = {
 
 server.use(cors(corsOptions));
 server.use(express.json());
-server.use("/signup", userController);
+server.use("/user", userController);
 server.use("/posts", postsController);
 server.use("/login", loginController);
 

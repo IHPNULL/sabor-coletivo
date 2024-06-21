@@ -1,17 +1,24 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import {
   Avatar,
   Box,
   Button,
   Container,
+  Stack,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LoginServices } from "../../services/loginService";
+
+const FormTextBox = styled(TextField)`
+  background-color: white;
+`;
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -47,14 +54,18 @@ export const SignUp = () => {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign Up
-        </Typography>
+        <Stack direction="row" alignItems="center">
+          <Stack alignItems="center">
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign Up
+            </Typography>
+          </Stack>
+        </Stack>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+          <FormTextBox
             margin="normal"
             required
             fullWidth
@@ -63,7 +74,7 @@ export const SignUp = () => {
             name="email"
             autoFocus
           />
-          <TextField
+          <FormTextBox
             margin="normal"
             required
             fullWidth
@@ -72,7 +83,7 @@ export const SignUp = () => {
             name="name"
             autoFocus
           />
-          <TextField
+          <FormTextBox
             margin="normal"
             required
             fullWidth
@@ -81,14 +92,20 @@ export const SignUp = () => {
             type="password"
             id="senha"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign Up
-          </Button>
+          <Stack direction="row" justifyContent="space-between">
+            <Link to="/home">
+              <Button
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Back
+              </Button>
+            </Link>
+            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              Sign Up
+            </Button>
+          </Stack>
         </Box>
       </Box>
     </Container>

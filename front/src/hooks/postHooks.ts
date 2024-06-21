@@ -1,4 +1,5 @@
-import { setUserProfile } from "../reducers/userProfileSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import { extendedApiPostsSlice } from "../services/postsService";
 import { RecipeFormType } from "../types/recipeType";
 
@@ -6,6 +7,8 @@ export type LikePostFunction = (postCode: string) => void;
 export type PublishPostFunction = (postData: RecipeFormType) => void;
 
 export const usePost = () => {
+  const navigate = useNavigate();
+
   const [mutate, likeResult] = extendedApiPostsSlice.useLikeMutation();
   const [dislike, disLikeResult] = extendedApiPostsSlice.useDislikeMutation();
   const [puclishRecipe, puclishRecipeResult] =
@@ -16,7 +19,8 @@ export const usePost = () => {
       return await puclishRecipe(postData)
         .unwrap()
         .then((resp) => {
-          setUserProfile(resp);
+          toast.success("Publicado");
+          navigate("/home");
           return resp;
         });
     } catch (err: any) {
@@ -29,7 +33,6 @@ export const usePost = () => {
       return await mutate(postCode)
         .unwrap()
         .then((resp) => {
-          setUserProfile(resp);
           return resp;
         });
     } catch (err: any) {
@@ -42,7 +45,6 @@ export const usePost = () => {
       return await dislike(postCode)
         .unwrap()
         .then((resp) => {
-          setUserProfile(resp);
           return resp;
         });
     } catch (err: any) {

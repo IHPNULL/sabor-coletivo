@@ -27,6 +27,13 @@ export const extendedApiLoginSlice = apiSlice.injectEndpoints({
         body: userToLogin,
       }),
     }),
+    signup: build.mutation({
+      query: (userToSignup: signupType) => ({
+        url: `${API.BaseURL}/signup`,
+        method: `POST`,
+        body: userToSignup,
+      }),
+    }),
     getUserData: build.query({
       transformResponse: (baseQueryReturnValue: UserType): UserType =>
         baseQueryReturnValue,
@@ -37,5 +44,5 @@ export const extendedApiLoginSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetLoginMutation, useGetUserDataQuery } =
+export const { useGetLoginMutation, useGetUserDataQuery, useSignupMutation } =
   extendedApiLoginSlice;
